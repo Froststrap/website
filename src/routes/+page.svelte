@@ -262,16 +262,6 @@
 			</a>
 			<a
 				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
-				href={docsUrl}
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="Docs"
-				title="Docs"
-			>
-				{@render bookIcon()}
-			</a>
-			<a
-				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
 				href={discordUrl}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -279,6 +269,16 @@
 				title="Discord"
 			>
 				{@render discordIcon()}
+			</a>
+			<a
+				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+				href={docsUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Docs"
+				title="Docs"
+			>
+				{@render bookIcon()}
 			</a>
 			<ThemeToggle />
 		</nav>
@@ -320,16 +320,6 @@
 				<nav class="flex flex-col gap-1" aria-label="Primary">
 					<a
 						class="flex items-center gap-3 rounded-md px-3 py-2.5 text-body font-medium text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
-						href={githubUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						onclick={closeMenu}
-					>
-						{@render githubIcon()}
-						GitHub
-					</a>
-					<a
-						class="flex items-center gap-3 rounded-md px-3 py-2.5 text-body font-medium text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
 						href={docsUrl}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -347,6 +337,16 @@
 					>
 						{@render discordIcon()}
 						Discord
+					</a>
+					<a
+						class="flex items-center gap-3 rounded-md px-3 py-2.5 text-body font-medium text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
+						href={githubUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						onclick={closeMenu}
+					>
+						{@render githubIcon()}
+						GitHub
 					</a>
 				</nav>
 
