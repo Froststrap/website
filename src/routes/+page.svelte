@@ -28,10 +28,6 @@
 			description: 'Available on Windows, macOS, and Linux. On Linux, Roblox runs through Sober.'
 		},
 		{
-			title: 'Lightweight bootstrapper',
-			description: 'A fast launcher with FastFlag profiles and performance controls built in.'
-		},
-		{
 			title: 'Mod generator',
 			description:
 				'Generate Roblox UI mods with custom colors, gradients, cursors, fonts, and more.'
@@ -44,10 +40,6 @@
 		{
 			title: 'Region selector',
 			description: 'Find and join servers in your preferred region for a better connection.'
-		},
-		{
-			title: 'Game shortcuts',
-			description: 'Create desktop shortcuts that jump straight into your favorite games.'
 		},
 		{
 			title: 'Discord Rich Presence',
