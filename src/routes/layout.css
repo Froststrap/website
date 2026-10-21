@@ -1,1 +1,116 @@
 @import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+	--background: #f6f9fc;
+	--surface: #ffffff;
+	--surface-muted: #eaf3fb;
+	--foreground: #0a1b33;
+	--muted-foreground: #516a84;
+	--border: #dbe6f1;
+	--accent: #2d72bd;
+	--primary: #0a1b33;
+	--primary-hover: #14345a;
+	--primary-foreground: #ffffff;
+	color-scheme: light;
+}
+
+[data-theme='dark'] {
+	--background: #071321;
+	--surface: #0d1e30;
+	--surface-muted: #10253a;
+	--foreground: #e8f1fa;
+	--muted-foreground: #9db4cb;
+	--border: #1e3a55;
+	--accent: #79b7f0;
+	--primary: #d9ebfc;
+	--primary-hover: #ffffff;
+	--primary-foreground: #071a33;
+}
+
+@theme {
+	--default-transition-duration: 200ms;
+	--text-body: 1.25rem;
+	--text-body--line-height: 1.75rem;
+	--text-small: 0.9375rem;
+	--text-small--line-height: 1.3125rem;
+	--text-lead: 1.625rem;
+	--text-lead--line-height: 1.45;
+}
+
+:root {
+	--text-body: 1.125rem;
+	--text-body--line-height: 1.625rem;
+	--text-lead: 1.125rem;
+	--text-lead--line-height: 1.45;
+}
+
+@media (min-width: 40rem) {
+	:root {
+		--text-body: 1.25rem;
+		--text-body--line-height: 1.75rem;
+		--text-lead: 1.25rem;
+		--text-lead--line-height: 1.45;
+	}
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-surface: var(--surface);
+	--color-surface-muted: var(--surface-muted);
+	--color-foreground: var(--foreground);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-border: var(--border);
+	--color-accent: var(--accent);
+	--color-primary: var(--primary);
+	--color-primary-hover: var(--primary-hover);
+	--color-primary-foreground: var(--primary-foreground);
+}
+
+@layer base {
+	*,
+	::before,
+	::after {
+		transition-property: background-color, border-color, outline-color;
+		transition-duration: 200ms;
+		transition-timing-function: ease;
+	}
+
+	body {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		padding-top: 4.5625rem;
+		background: var(--background);
+		color: var(--foreground);
+		transition-property: background-color, color;
+		transition-duration: 200ms;
+		transition-timing-function: ease;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			transition-duration: 0ms;
+		}
+	}
+
+	a:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	::selection {
+		background: #bcd9f5;
+		color: #071a33;
+	}
+
+	[data-theme='dark'] ::selection {
+		background: #2d72bd;
+		color: #ffffff;
+	}
+}
