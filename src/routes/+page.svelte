@@ -176,10 +176,10 @@
 </script>
 
 <svelte:head>
-	<title>Froststrap — A multi-platform bootstrapper</title>
+	<title>Froststrap - A multi-platform bootstrapper</title>
 	<meta
 		name="description"
-		content="Froststrap is a multi-platform bootstrapper based from Fishstrap. Download it for Windows, macOS, and Linux."
+		content="Froststrap is a multi-platform bootstrapper forked off Fishstrap, it is available on Windows, macOS, and Linux."
 	/>
 </svelte:head>
 
@@ -466,7 +466,7 @@
 						href={RELEASES_URL}
 					>
 						Browse all releases
-					</a> — couldn't reach GitHub.
+					</a> - couldn't reach GitHub.
 				{:else if release}
 					{platformName ? `${platformName} · ` : ''}Latest release {release.tag_name}
 					{#if alternateMacAsset}
