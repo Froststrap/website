@@ -2,7 +2,7 @@
 	import { GITHUB_ORG_URL, GITHUB_URL, LICENSE_URL } from '../site';
 </script>
 
-<footer class="mt-auto border-t border-border/50">
+<footer class="mt-auto border-t border-border/50 bg-background">
 	<div
 		class="mx-auto flex w-full max-w-[1440px] flex-col items-start justify-between gap-4 px-8 pt-6 pb-10 text-small text-muted-foreground transition-colors sm:px-12 lg:flex-row lg:items-center"
 	>

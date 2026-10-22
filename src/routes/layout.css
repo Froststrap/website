@@ -13,6 +13,7 @@
 	--primary: #0a1b33;
 	--primary-hover: #14345a;
 	--primary-foreground: #ffffff;
+	--snow-color: #5b7a99;
 	color-scheme: light;
 }
 
@@ -27,6 +28,7 @@
 	--primary: #d9ebfc;
 	--primary-hover: #ffffff;
 	--primary-foreground: #071a33;
+	--snow-color: #dceaf9;
 }
 
 @theme {
