@@ -97,7 +97,7 @@
 	<title>Froststrap - A multi-platform bootstrapper</title>
 	<meta
 		name="description"
-		content="Froststrap is a multi-platform bootstrapper forked off Fishstrap, it is available on Windows, macOS, and Linux."
+		content="Froststrap is a multi-platform bootstrapper forked from Fishstrap. It is available on Windows, macOS, and Linux."
 	/>
 </svelte:head>
 
@@ -120,7 +120,7 @@
 			</div>
 
 			<p class="mx-auto max-w-[38rem] text-lead text-muted-foreground transition-colors lg:mx-0">
-				A multi-platform bootstrapper based from Fishstrap.
+				A multi-platform bootstrapper based on Fishstrap.
 			</p>
 		</div>
 
@@ -132,7 +132,7 @@
 						disabled
 						class="inline-flex min-h-[3.75rem] w-full cursor-not-allowed items-center justify-center gap-2.5 rounded-md border border-border bg-surface-muted px-6 py-3.5 text-body font-semibold text-muted-foreground opacity-70 select-none xl:flex-1"
 					>
-						Desktop Only
+						Desktop only
 						<MonitorIcon />
 					</button>
 				{:else}
@@ -161,12 +161,13 @@
 				{:else if status === 'loading'}
 					Finding the latest release…
 				{:else if status === 'error'}
+					Couldn't reach GitHub.
 					<a
 						class="text-accent underline-offset-2 transition-colors hover:underline"
 						href={RELEASES_URL}
 					>
 						Browse all releases
-					</a> - couldn't reach GitHub.
+					</a>
 				{:else if release}
 					{platformName ? `${platformName} · ` : ''}Latest release {release.tag_name}
 					{#if alternateMacAsset}
