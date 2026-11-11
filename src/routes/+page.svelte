@@ -12,12 +12,38 @@
 	} from '../lib/download';
 	import { features } from '../lib/features';
 	import { GITHUB_URL } from '../lib/site';
+	import { Download, Monitor, Star } from '@lucide/svelte';
 	import Footer from '../lib/components/Footer.svelte';
 	import Header from '../lib/components/Header.svelte';
 	import Logo from '../lib/components/Logo.svelte';
-	import DownloadIcon from '../lib/icons/DownloadIcon.svelte';
-	import MonitorIcon from '../lib/icons/MonitorIcon.svelte';
-	import StarIcon from '../lib/icons/StarIcon.svelte';
+
+	function reveal(node: HTMLElement) {
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			return;
+		}
+
+		node.classList.add('reveal');
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				}
+			},
+			{ threshold: 0.15 }
+		);
+
+		observer.observe(node);
+
+		return {
+			destroy() {
+				observer.disconnect();
+			}
+		};
+	}
 
 	let platform = $state<Platform>('unknown');
 	let release = $state<Release | null>(null);
@@ -104,16 +130,25 @@
 <Header />
 
 <main
-	class="mx-auto grid w-full max-w-[1440px] gap-y-8 px-8 pt-[clamp(2.5rem,8vw,7rem)] pb-[clamp(1.25rem,4vw,3.5rem)] sm:px-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-x-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-x-12"
+	class="relative mx-auto grid w-full max-w-[1200px] gap-y-8 px-8 pt-[clamp(2.5rem,8vw,7rem)] pb-[clamp(1.25rem,4vw,3.5rem)] sm:px-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-x-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-x-12"
 >
+	<div
+		aria-hidden="true"
+		class="pointer-events-none absolute -top-32 left-1/2 -z-10 h-[36rem] w-[min(72rem,140vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]"
+	></div>
+
 	<div class="contents lg:flex lg:flex-col lg:gap-8">
 		<div class="order-1 min-w-0 text-center lg:order-none lg:text-left">
 			<div
 				class="mb-6 flex items-center justify-center gap-[clamp(0.75rem,2.5vw,1.6rem)] lg:justify-start"
 			>
-				<Logo class="w-10 sm:w-[4.6875rem] lg:w-[clamp(3rem,12vw,9rem)]" width={144} height={144} />
+				<Logo
+					class="w-10 sm:w-[4.6875rem] lg:w-[clamp(2.5rem,6vw,4.5rem)]"
+					width={144}
+					height={144}
+				/>
 				<h1
-					class="m-0 text-[2.5rem] leading-[0.9] font-semibold tracking-[-0.06em] text-foreground transition-colors sm:text-[4.6875rem] lg:text-[clamp(3rem,9vw,6.75rem)]"
+					class="m-0 text-[2.5rem] leading-[0.9] font-semibold tracking-[-0.06em] text-foreground transition-colors sm:text-[4.6875rem] lg:text-[clamp(2.5rem,6.5vw,5.25rem)]"
 				>
 					Froststrap
 				</h1>
@@ -133,11 +168,11 @@
 						class="inline-flex min-h-[3.75rem] w-full cursor-not-allowed items-center justify-center gap-2.5 rounded-md border border-border bg-surface-muted px-6 py-3.5 text-body font-semibold text-muted-foreground opacity-70 select-none xl:flex-1"
 					>
 						Desktop only
-						<MonitorIcon />
+						<Monitor class="size-5" />
 					</button>
 				{:else}
 					<a
-						class="inline-flex min-h-[3.75rem] w-full items-center justify-center gap-2.5 rounded-md border border-primary bg-primary px-6 py-3.5 text-body font-semibold text-primary-foreground transition-colors select-none hover:border-primary-hover hover:bg-primary-hover xl:flex-1"
+						class="inline-flex min-h-[3.75rem] w-full items-center justify-center gap-2.5 rounded-md border border-primary bg-primary px-6 py-3.5 text-body font-semibold text-primary-foreground select-none hover:-translate-y-px hover:border-primary-hover hover:bg-primary-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent xl:flex-1"
 						href={downloadUrl}
 					>
 						{downloadLabel}
@@ -145,13 +180,13 @@
 					</a>
 				{/if}
 				<a
-					class="inline-flex min-h-[3.75rem] w-full items-center justify-center gap-2.5 rounded-md border border-foreground/15 px-6 py-3.5 text-body font-semibold text-muted-foreground transition-colors select-none hover:border-foreground/25 hover:text-foreground xl:flex-1"
+					class="inline-flex min-h-[3.75rem] w-full items-center justify-center gap-2.5 rounded-md border border-foreground/15 px-6 py-3.5 text-body font-semibold text-muted-foreground select-none hover:border-foreground/25 hover:text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent xl:flex-1"
 					href={GITHUB_URL}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					Star on GitHub
-					<StarIcon />
+					<Star class="size-5" />
 				</a>
 			</div>
 
@@ -203,7 +238,7 @@
 					class="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-body text-muted-foreground transition-colors lg:justify-start"
 				>
 					<span class="inline-flex items-center gap-2">
-						<StarIcon />
+						<Star class="size-5" />
 						<span>
 							<strong class="font-bold text-foreground transition-colors"
 								>{formatCompactNumber(stats.stars)}</strong
@@ -212,7 +247,7 @@
 						</span>
 					</span>
 					<span class="inline-flex items-center gap-2">
-						<DownloadIcon />
+						<Download class="size-5" />
 						<span>
 							<strong class="font-bold text-foreground transition-colors"
 								>{formatCompactNumber(stats.downloads)}</strong
@@ -227,7 +262,7 @@
 
 	<figure class="order-2 m-0 w-full lg:order-none">
 		<img
-			class="block h-auto w-full rounded-xl border border-border/50 select-none"
+			class="block h-auto w-full rounded-xl border border-border/50 shadow-(--shadow-hero) select-none"
 			src="/linux.png"
 			alt="Froststrap bootstrapper settings on Linux"
 			width="1354"
@@ -237,8 +272,14 @@
 	</figure>
 </main>
 
-<section id="features" aria-labelledby="features-title" class="scroll-mt-20">
-	<div class="mx-auto w-full max-w-[1440px] px-8 pt-2 pb-[clamp(3.5rem,7vw,6rem)] sm:px-12">
+<section
+	id="features"
+	aria-labelledby="features-title"
+	class="scroll-mt-20 border-t border-border/50"
+>
+	<div
+		class="mx-auto w-full max-w-[1200px] px-8 pt-[clamp(3rem,7vw,5rem)] pb-[clamp(3.5rem,7vw,6rem)] sm:px-12"
+	>
 		<h2
 			id="features-title"
 			class="m-0 text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.045em] text-foreground transition-colors sm:text-[3.375rem]"
@@ -246,9 +287,12 @@
 			Features
 		</h2>
 
-		<div class="mt-8 grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
+		<div class="mt-8 grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-6">
 			{#each features as feature (feature.title)}
-				<div class="min-w-0">
+				<div
+					use:reveal
+					class="min-w-0 rounded-xl border border-border bg-surface p-6 shadow-(--shadow-card) hover:-translate-y-0.5 hover:border-accent/50"
+				>
 					<h3
 						class="m-0 text-[1.375rem] leading-snug font-semibold text-foreground transition-colors md:text-[1.6875rem]"
 					>

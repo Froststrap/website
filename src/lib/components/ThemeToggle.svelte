@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import MoonIcon from '../icons/MoonIcon.svelte';
-	import SunIcon from '../icons/SunIcon.svelte';
+	import { Moon, Sun } from '@lucide/svelte';
 
 	type Theme = 'light' | 'dark';
 
@@ -42,9 +41,9 @@
 		onclick={toggleTheme}
 	>
 		{#if theme === 'dark'}
-			<SunIcon />
+			<Sun class="size-5" />
 		{:else}
-			<MoonIcon />
+			<Moon class="size-5" />
 		{/if}
 	</button>
 </span>

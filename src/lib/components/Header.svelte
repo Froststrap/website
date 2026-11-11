@@ -1,9 +1,8 @@
 <script lang="ts">
+	import { BookOpen, Menu, X } from '@lucide/svelte';
 	import { DISCORD_URL, DOCS_URL, GITHUB_URL } from '../site';
-	import BookIcon from '../icons/BookIcon.svelte';
 	import DiscordIcon from '../icons/DiscordIcon.svelte';
 	import GithubIcon from '../icons/GithubIcon.svelte';
-	import MenuIcon from '../icons/MenuIcon.svelte';
 	import Logo from './Logo.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 
@@ -59,9 +58,11 @@
 	});
 </script>
 
-<header class="fixed inset-x-0 top-0 z-40 border-b border-border/50 bg-background select-none">
+<header
+	class="fixed inset-x-0 top-0 z-40 border-b border-border/50 bg-background/75 backdrop-blur-md select-none"
+>
 	<div
-		class="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-8 px-8 py-4 sm:px-12"
+		class="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-8 px-8 py-4 sm:px-12"
 	>
 		<a
 			class="inline-flex items-center gap-3 text-[1.40625rem] leading-7 font-bold tracking-[-0.02em]"
@@ -73,7 +74,7 @@
 
 		<nav class="hidden items-center gap-2 lg:flex" aria-label="Primary">
 			<a
-				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
 				href={GITHUB_URL}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -83,7 +84,7 @@
 				<GithubIcon />
 			</a>
 			<a
-				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
 				href={DISCORD_URL}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -93,14 +94,14 @@
 				<DiscordIcon />
 			</a>
 			<a
-				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+				class="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
 				href={DOCS_URL}
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label="Docs"
 				title="Docs"
 			>
-				<BookIcon />
+				<BookOpen class="size-5" />
 			</a>
 			<ThemeToggle />
 		</nav>
@@ -114,14 +115,14 @@
 			aria-expanded={menuOpen}
 			onclick={toggleMenu}
 		>
-			<MenuIcon open={menuOpen} />
+			{#if menuOpen}<X class="size-5" />{:else}<Menu class="size-5" />{/if}
 		</button>
 	</div>
 
 	{#if menuOpen}
 		<div id="mobile-menu" class="lg:hidden">
 			<div
-				class="mx-auto max-h-[calc(100dvh-4.5625rem)] w-full max-w-[1440px] overflow-y-auto px-8 pt-2 pb-5 sm:px-12"
+				class="mx-auto max-h-[calc(100dvh-4.5625rem)] w-full max-w-[1200px] overflow-y-auto px-8 pt-2 pb-5 sm:px-12"
 			>
 				<nav class="flex flex-col gap-1" aria-label="Primary">
 					<a
@@ -131,7 +132,7 @@
 						rel="noopener noreferrer"
 						onclick={closeMenu}
 					>
-						<BookIcon />
+						<BookOpen class="size-5" />
 						Docs
 					</a>
 					<a
