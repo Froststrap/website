@@ -13,6 +13,9 @@
 	import { features } from '../lib/features';
 	import { GITHUB_URL } from '../lib/site';
 	import { Download, Monitor, Star } from '@lucide/svelte';
+	import AppleIcon from '../lib/icons/AppleIcon.svelte';
+	import LinuxIcon from '../lib/icons/LinuxIcon.svelte';
+	import WindowsIcon from '../lib/icons/WindowsIcon.svelte';
 	import Footer from '../lib/components/Footer.svelte';
 	import Header from '../lib/components/Header.svelte';
 	import Logo from '../lib/components/Logo.svelte';
@@ -116,6 +119,38 @@
 			default:
 				return 'Download latest release';
 		}
+	});
+
+	const downloadColumns = $derived.by(() => {
+		const url = (pattern: RegExp) =>
+			release?.assets.find((candidate) => pattern.test(candidate.name))?.browser_download_url ??
+			RELEASES_URL;
+
+		return [
+			{
+				name: 'Windows',
+				icon: WindowsIcon,
+				links: [{ label: '.msi installer', href: url(/windows-x64\.msi$/i) }]
+			},
+			{
+				name: 'Mac',
+				icon: AppleIcon,
+				links: [
+					{ label: '.pkg · Apple Silicon', href: url(/macos-arm64-Setup\.pkg$/i) },
+					{ label: '.pkg · Intel', href: url(/macos-x64-Setup\.pkg$/i) }
+				]
+			},
+			{
+				name: 'Linux',
+				icon: LinuxIcon,
+				links: [
+					{ label: '.AppImage', href: url(/linux-x64\.AppImage$/i) },
+					{ label: '.deb · Debian', href: url(/linux-x64\.deb$/i) },
+					{ label: '.rpm · Fedora', href: url(/linux-x64\.rpm$/i) },
+					{ label: '.pkg.tar.zst · Arch', href: url(/archlinux\.pkg\.tar\.zst$/i) }
+				]
+			}
+		];
 	});
 </script>
 
@@ -271,6 +306,57 @@
 		/>
 	</figure>
 </main>
+
+<section
+	id="downloads"
+	aria-labelledby="downloads-title"
+	class="scroll-mt-20 border-t border-border/50"
+>
+	<div
+		class="mx-auto w-full max-w-[1200px] px-8 pt-[clamp(3rem,7vw,5rem)] pb-[clamp(3.5rem,7vw,6rem)] sm:px-12"
+	>
+		<h2
+			id="downloads-title"
+			class="m-0 text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.045em] text-foreground transition-colors sm:text-[3.375rem]"
+		>
+			Downloads
+		</h2>
+
+		<p class="mt-3 max-w-[38rem] text-lead text-muted-foreground transition-colors">
+			Pick a package for your platform from the latest release.
+		</p>
+
+		<div
+			class="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-border/60"
+		>
+			{#each downloadColumns as column (column.name)}
+				<div use:reveal class="flex flex-col items-center gap-4 text-center sm:px-8">
+					<column.icon class="size-7 text-muted-foreground" />
+
+					<h3
+						class="m-0 text-[1.6875rem] leading-snug font-semibold text-foreground transition-colors"
+					>
+						{column.name}
+					</h3>
+
+					<ul class="m-0 flex list-none flex-col items-center gap-2.5 p-0">
+						{#each column.links as link (link.label)}
+							<li>
+								<a
+									class="inline-flex items-center gap-1.5 text-accent underline-offset-2 transition-colors hover:text-accent-hover hover:underline"
+									href={link.href}
+								>
+									<Download class="size-4 shrink-0" aria-hidden="true" />
+									{link.label}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
 
 <section
 	id="features"
