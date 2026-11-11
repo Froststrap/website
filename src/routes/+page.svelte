@@ -12,7 +12,7 @@
 	} from '../lib/download';
 	import { features } from '../lib/features';
 	import { GITHUB_URL } from '../lib/site';
-	import { Download, Monitor, Star } from '@lucide/svelte';
+	import { Check, Download, Monitor, Star, Terminal } from '@lucide/svelte';
 	import AppleIcon from '../lib/icons/AppleIcon.svelte';
 	import GithubIcon from '../lib/icons/GithubIcon.svelte';
 	import LinuxIcon from '../lib/icons/LinuxIcon.svelte';
@@ -47,6 +47,23 @@
 				observer.disconnect();
 			}
 		};
+	}
+
+	let copiedCommand = $state<string | null>(null);
+	let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+
+	async function copyCommand(command: string, key: string) {
+		try {
+			await navigator.clipboard.writeText(command);
+		} catch {
+			return;
+		}
+
+		copiedCommand = key;
+		clearTimeout(copiedTimer);
+		copiedTimer = setTimeout(() => {
+			copiedCommand = null;
+		}, 1600);
 	}
 
 	let platform = $state<Platform>('unknown');
@@ -131,7 +148,11 @@
 			{
 				name: 'Windows',
 				icon: WindowsIcon,
-				links: [{ label: '.msi installer', href: url(/windows-x64\.msi$/i) }]
+				links: [
+					{ label: '.msi installer', href: url(/windows-x64\.msi$/i) },
+					{ label: 'Winget', command: 'winget install Froststrap.Froststrap' },
+					{ label: 'Scoop', command: 'scoop bucket add games; scoop install games/froststrap' }
+				]
 			},
 			{
 				name: 'Mac',
@@ -148,7 +169,8 @@
 					{ label: '.AppImage', href: url(/linux-x64\.AppImage$/i) },
 					{ label: '.deb · Debian', href: url(/linux-x64\.deb$/i) },
 					{ label: '.rpm · Fedora', href: url(/linux-x64\.rpm$/i) },
-					{ label: '.pkg.tar.zst · Arch', href: url(/archlinux\.pkg\.tar\.zst$/i) }
+					{ label: '.pkg.tar.zst · Arch', href: url(/archlinux\.pkg\.tar\.zst$/i) },
+					{ label: 'AUR', command: 'yay -S froststrap-bin' }
 				]
 			}
 		];
@@ -341,13 +363,30 @@
 					<ul class="m-0 flex list-none flex-col items-center gap-2.5 p-0">
 						{#each column.links as link (link.label)}
 							<li>
-								<a
-									class="inline-flex items-center gap-1.5 text-accent underline-offset-2 transition-colors hover:text-accent-hover hover:underline"
-									href={link.href}
-								>
-									<Download class="size-4 shrink-0" aria-hidden="true" />
-									{link.label}
-								</a>
+								{#if link.command}
+									<button
+										type="button"
+										class="inline-flex items-center gap-1.5 text-accent underline-offset-2 transition-colors hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent"
+										title={link.command}
+										onclick={() => copyCommand(link.command ?? '', link.label)}
+									>
+										{#if copiedCommand === link.label}
+											<Check class="size-4 shrink-0" aria-hidden="true" />
+											Copied
+										{:else}
+											<Terminal class="size-4 shrink-0" aria-hidden="true" />
+											{link.label}
+										{/if}
+									</button>
+								{:else}
+									<a
+										class="inline-flex items-center gap-1.5 text-accent underline-offset-2 transition-colors hover:text-accent-hover hover:underline"
+										href={link.href}
+									>
+										<Download class="size-4 shrink-0" aria-hidden="true" />
+										{link.label}
+									</a>
+								{/if}
 							</li>
 						{/each}
 					</ul>
