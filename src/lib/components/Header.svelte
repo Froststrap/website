@@ -61,9 +61,7 @@
 <header
 	class="fixed inset-x-0 top-0 z-40 border-b border-border/50 bg-background/75 backdrop-blur-md select-none"
 >
-	<div
-		class="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-8 px-8 py-4 sm:px-12"
-	>
+	<div class="mx-auto flex w-full items-center justify-between gap-8 px-8 py-4 sm:px-12">
 		<a
 			class="inline-flex items-center gap-3 text-[1.40625rem] leading-7 font-bold tracking-[-0.02em]"
 			href="/"
@@ -122,7 +120,7 @@
 	{#if menuOpen}
 		<div id="mobile-menu" class="lg:hidden">
 			<div
-				class="mx-auto max-h-[calc(100dvh-4.5625rem)] w-full max-w-[1200px] overflow-y-auto px-8 pt-2 pb-5 sm:px-12"
+				class="mx-auto max-h-[calc(100dvh-4.5625rem)] w-full overflow-y-auto px-8 pt-2 pb-5 sm:px-12"
 			>
 				<nav class="flex flex-col gap-1" aria-label="Primary">
 					<a

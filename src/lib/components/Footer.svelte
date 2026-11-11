@@ -4,7 +4,7 @@
 
 <footer class="mt-auto border-t border-border/50 bg-background">
 	<div
-		class="mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between gap-4 px-8 pt-6 pb-10 text-small text-muted-foreground transition-colors sm:px-12 lg:flex-row lg:items-center"
+		class="mx-auto flex w-full flex-col items-start justify-between gap-4 px-8 pt-6 pb-10 text-small text-muted-foreground transition-colors sm:px-12 lg:flex-row lg:items-center"
 	>
 		<p class="m-0">
 			Froststrap is a fork of Fishstrap, licensed under
