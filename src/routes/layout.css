@@ -18,6 +18,7 @@
 	--glow: rgb(45 114 189 / 0.12);
 	--shadow-card: 0 1px 2px rgb(10 27 51 / 0.05), 0 12px 32px -16px rgb(10 27 51 / 0.14);
 	--shadow-hero: 0 32px 64px -24px rgb(10 27 51 / 0.3);
+	--shadow-island: 0 1px 2px rgb(10 27 51 / 0.08), 0 8px 24px -8px rgb(10 27 51 / 0.25);
 	color-scheme: light;
 }
 
@@ -37,6 +38,7 @@
 	--glow: rgb(121 183 240 / 0.1);
 	--shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 32px -16px rgb(0 0 0 / 0.4);
 	--shadow-hero: 0 32px 64px -24px rgb(0 0 0 / 0.55);
+	--shadow-island: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.5);
 }
 
 @theme {
@@ -97,7 +99,7 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
-		padding-top: 4.5625rem;
+		padding-top: 4.625rem;
 		background: var(--background);
 		color: var(--foreground);
 		overflow-x: clip;

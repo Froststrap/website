@@ -3,3 +3,4 @@ export const GITHUB_ORG_URL = 'https://github.com/Froststrap';
 export const DOCS_URL = 'https://docs.froststrap.xyz';
 export const DISCORD_URL = 'https://discord.gg/froststrap-studio-1364660238963179520';
 export const LICENSE_URL = 'https://choosealicense.com/licenses/mpl-2.0/';
+export const FORGEJO_URL = 'https://git.froststrap.xyz/Froststrap/Froststrap';

@@ -35,7 +35,7 @@
 <span class="inline-flex text-muted-foreground transition-colors hover:text-foreground">
 	<button
 		type="button"
-		class="inline-flex size-10 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+		class="inline-flex size-9 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 		aria-label={label}
 		title={label}
 		onclick={toggleTheme}

@@ -14,6 +14,7 @@
 	import { GITHUB_URL } from '../lib/site';
 	import { Download, Monitor, Star } from '@lucide/svelte';
 	import AppleIcon from '../lib/icons/AppleIcon.svelte';
+	import GithubIcon from '../lib/icons/GithubIcon.svelte';
 	import LinuxIcon from '../lib/icons/LinuxIcon.svelte';
 	import WindowsIcon from '../lib/icons/WindowsIcon.svelte';
 	import Footer from '../lib/components/Footer.svelte';
@@ -165,7 +166,7 @@
 <Header />
 
 <main
-	class="relative mx-auto grid min-h-[calc(100dvh-4.5625rem)] w-full gap-y-8 px-8 pt-[clamp(2.5rem,8vw,7rem)] pb-[clamp(1.25rem,4vw,3.5rem)] sm:px-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-x-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-x-12"
+	class="relative mx-auto grid min-h-[calc(100dvh-4.625rem)] w-full gap-y-8 px-8 pt-[clamp(2.5rem,8vw,7rem)] pb-[clamp(1.25rem,4vw,3.5rem)] sm:px-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-x-8 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-x-12"
 >
 	<div
 		aria-hidden="true"
@@ -221,7 +222,7 @@
 					rel="noopener noreferrer"
 				>
 					Star on GitHub
-					<Star class="size-5" />
+					<GithubIcon class="size-5" />
 				</a>
 			</div>
 
@@ -310,7 +311,7 @@
 <section
 	id="downloads"
 	aria-labelledby="downloads-title"
-	class="scroll-mt-20 border-t border-border/50"
+	class="scroll-mt-[5.5rem] border-t border-border/50"
 >
 	<div class="mx-auto w-full px-8 pt-[clamp(3rem,7vw,5rem)] pb-[clamp(3.5rem,7vw,6rem)] sm:px-12">
 		<h2
@@ -359,7 +360,7 @@
 <section
 	id="features"
 	aria-labelledby="features-title"
-	class="scroll-mt-20 border-t border-border/50"
+	class="scroll-mt-[5.5rem] border-t border-border/50"
 >
 	<div class="mx-auto w-full px-8 pt-[clamp(3rem,7vw,5rem)] pb-[clamp(3.5rem,7vw,6rem)] sm:px-12">
 		<h2
