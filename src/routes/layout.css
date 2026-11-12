@@ -19,6 +19,7 @@
 	--shadow-card: 0 1px 2px rgb(10 27 51 / 0.05), 0 12px 32px -16px rgb(10 27 51 / 0.14);
 	--shadow-hero: 0 32px 64px -24px rgb(10 27 51 / 0.3);
 	--shadow-island: 0 1px 2px rgb(10 27 51 / 0.08), 0 8px 24px -8px rgb(10 27 51 / 0.25);
+	--header-offset: 4.125rem;
 	color-scheme: light;
 }
 
@@ -39,6 +40,12 @@
 	--shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 32px -16px rgb(0 0 0 / 0.4);
 	--shadow-hero: 0 32px 64px -24px rgb(0 0 0 / 0.55);
 	--shadow-island: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.5);
+}
+
+@media (min-width: 40rem) {
+	:root {
+		--header-offset: 4.625rem;
+	}
 }
 
 @theme {
@@ -99,7 +106,7 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
-		padding-top: 4.625rem;
+		padding-top: var(--header-offset);
 		background: var(--background);
 		color: var(--foreground);
 		overflow-x: clip;

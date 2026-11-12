@@ -84,22 +84,32 @@
 <svelte:window onpointerdown={onWindowPointerDown} onkeydown={onWindowKeyDown} />
 
 <header
-	class="fixed inset-x-4 top-4 z-40 rounded-2xl border border-border/50 bg-background/75 shadow-(--shadow-island) backdrop-blur-md select-none"
+	class="fixed inset-x-2 top-2 z-40 max-w-[calc(100vw-1rem)] rounded-2xl border border-border/50 bg-background/75 shadow-(--shadow-island) backdrop-blur-md select-none sm:inset-x-4 sm:top-4 sm:max-w-none"
 >
-	<div class="mx-auto flex w-full items-center justify-between gap-8 px-8 py-2.5 sm:px-12">
-		<a
-			class="inline-flex items-center gap-3 text-[1.40625rem] leading-7 font-bold tracking-[-0.02em]"
-			href="/"
-		>
-			<Logo class="size-9" width={36} height={36} />
-			<span>Froststrap</span>
-		</a>
+	<div class="mx-auto flex w-full items-center justify-between gap-2 px-4 py-2.5 sm:gap-3 sm:px-8">
+		<div class="flex items-center gap-0">
+			<button
+				bind:this={menuButton}
+				type="button"
+				class="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:size-9 md:hidden"
+				aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+				aria-controls="mobile-menu"
+				aria-expanded={menuOpen}
+				onclick={toggleMenu}
+			>
+				{#if menuOpen}<X class="size-5" />{:else}<Menu class="size-5" />{/if}
+			</button>
 
-		<nav class="hidden items-center gap-2 lg:flex" aria-label="Primary">
-			<div bind:this={gitMenu} class="relative">
+			<a class="hidden items-center gap-3 sm:inline-flex" href="/" aria-label="Froststrap">
+				<Logo class="size-9" width={36} height={36} />
+			</a>
+		</div>
+
+		<nav class="flex min-w-0 shrink-0 flex-wrap items-center gap-0 lg:gap-1" aria-label="Primary">
+			<div bind:this={gitMenu} class="relative inline-flex shrink-0">
 				<button
 					type="button"
-					class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
+					class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground sm:size-9"
 					aria-label="Source code"
 					title="Source code"
 					aria-haspopup="true"
@@ -137,7 +147,7 @@
 				{/if}
 			</div>
 			<a
-				class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
+				class="hidden size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground lg:inline-flex"
 				href={DISCORD_URL}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -147,7 +157,7 @@
 				<DiscordIcon />
 			</a>
 			<a
-				class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground"
+				class="hidden size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-muted hover:text-foreground lg:inline-flex"
 				href={DOCS_URL}
 				target="_blank"
 				rel="noopener noreferrer"
@@ -156,26 +166,14 @@
 			>
 				<BookOpen class="size-5" />
 			</a>
-			<ThemeToggle />
+			<span class="shrink-0"><ThemeToggle /></span>
 		</nav>
-
-		<button
-			bind:this={menuButton}
-			type="button"
-			class="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
-			aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-			aria-controls="mobile-menu"
-			aria-expanded={menuOpen}
-			onclick={toggleMenu}
-		>
-			{#if menuOpen}<X class="size-5" />{:else}<Menu class="size-5" />{/if}
-		</button>
 	</div>
 
 	{#if menuOpen}
 		<div id="mobile-menu" class="lg:hidden">
 			<div
-				class="mx-auto max-h-[calc(100dvh-4.625rem)] w-full overflow-y-auto px-8 pt-2 pb-5 sm:px-12"
+				class="mx-auto max-h-[calc(100dvh-var(--header-offset))] w-full overflow-y-auto px-4 pt-2 pb-5 sm:px-8"
 			>
 				<nav class="flex flex-col gap-1" aria-label="Primary">
 					<a

@@ -32,10 +32,10 @@
 	const label = $derived(theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
 </script>
 
-<span class="inline-flex text-muted-foreground transition-colors hover:text-foreground">
+<span class="inline-flex shrink-0">
 	<button
 		type="button"
-		class="inline-flex size-9 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+		class="inline-flex size-8 items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:size-9"
 		aria-label={label}
 		title={label}
 		onclick={toggleTheme}
