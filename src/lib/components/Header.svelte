@@ -217,10 +217,6 @@
 						Forgejo
 					</a>
 				</nav>
-
-				<div class="mt-4 flex justify-end">
-					<ThemeToggle />
-				</div>
 			</div>
 		</div>
 	{/if}
