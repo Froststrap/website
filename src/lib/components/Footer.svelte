@@ -9,7 +9,7 @@
 		<p class="m-0">
 			Froststrap is a fork of Fishstrap, licensed under
 			<a
-				class="text-accent underline-offset-2 transition-colors hover:underline"
+				class="text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:decoration-accent"
 				href={LICENSE_URL}
 				target="_blank"
 				rel="noopener noreferrer">MPL-2.0</a

@@ -94,6 +94,12 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Game Invite - Froststrap</title>
+	<!-- invite links are for sharing, not for search results -->
+	<meta name="robots" content="noindex" />
+</svelte:head>
+
 <main class="min-h-[60vh] flex items-center justify-center p-6">
 	<div class="max-w-3xl w-full flex gap-6 items-start">
 		<!-- Thumbnail + Game Info -->

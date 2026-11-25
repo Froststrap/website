@@ -1,3 +1,4 @@
+export const SITE_URL = 'https://froststrap.xyz';
 export const GITHUB_URL = 'https://github.com/Froststrap/Froststrap';
 export const GITHUB_ORG_URL = 'https://github.com/Froststrap';
 export const DOCS_URL = 'https://docs.froststrap.xyz';

@@ -11,7 +11,14 @@
 		type RepoStats
 	} from '../lib/download';
 	import { features } from '../lib/features';
-	import { GITHUB_URL } from '../lib/site';
+	import {
+		DISCORD_URL,
+		FORGEJO_URL,
+		GITHUB_ORG_URL,
+		GITHUB_URL,
+		LICENSE_URL,
+		SITE_URL
+	} from '../lib/site';
 	import { Check, Download, Monitor, Star, Terminal } from '@lucide/svelte';
 	import AppleIcon from '../lib/icons/AppleIcon.svelte';
 	import GithubIcon from '../lib/icons/GithubIcon.svelte';
@@ -188,14 +195,62 @@
 			}
 		];
 	});
+
+	const title = 'Froststrap - Official Site | Open-Source Roblox Bootstrapper';
+	const description =
+		'Download Froststrap from its official website. A free, open-source Roblox bootstrapper for Windows, macOS and Linux, based on Fishstrap.';
+
+	// tells search engines which site, repo and community are the real Froststrap
+	const structuredData = JSON.stringify({
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'Organization',
+				'@id': `${SITE_URL}/#organization`,
+				name: 'Froststrap',
+				url: `${SITE_URL}/`,
+				sameAs: [GITHUB_ORG_URL, GITHUB_URL, FORGEJO_URL, DISCORD_URL]
+			},
+			{
+				'@type': 'WebSite',
+				'@id': `${SITE_URL}/#website`,
+				name: 'Froststrap',
+				url: `${SITE_URL}/`,
+				publisher: { '@id': `${SITE_URL}/#organization` }
+			},
+			{
+				'@type': 'SoftwareApplication',
+				name: 'Froststrap',
+				description,
+				url: `${SITE_URL}/`,
+				applicationCategory: 'UtilitiesApplication',
+				operatingSystem: 'Windows, macOS, Linux',
+				downloadUrl: RELEASES_URL,
+				license: LICENSE_URL,
+				isAccessibleForFree: true,
+				offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+				sameAs: [GITHUB_URL],
+				publisher: { '@id': `${SITE_URL}/#organization` }
+			}
+		]
+	}).replace(/</g, '\\u003c');
 </script>
 
 <svelte:head>
-	<title>Froststrap - A multi-platform bootstrapper</title>
-	<meta
-		name="description"
-		content="Froststrap is a multi-platform bootstrapper forked from Fishstrap. It is available on Windows, macOS, and Linux."
-	/>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<link rel="canonical" href="{SITE_URL}/" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Froststrap" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content="{SITE_URL}/" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+
+	{@html '<script type="application/ld+json">' + structuredData + '</' + 'script>'}
 </svelte:head>
 
 <Header />
@@ -226,7 +281,7 @@
 			</div>
 
 			<p class="mx-auto max-w-[38rem] text-lead text-muted-foreground transition-colors lg:mx-0">
-				A multi-platform bootstrapper based on Fishstrap.
+				A multi-platform Roblox bootstrapper based on Fishstrap.
 			</p>
 		</div>
 
@@ -269,7 +324,7 @@
 				{:else if status === 'error'}
 					Couldn't reach GitHub.
 					<a
-						class="text-accent underline-offset-2 transition-colors hover:underline"
+						class="text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:decoration-accent"
 						href={RELEASES_URL}
 					>
 						Browse all releases
@@ -280,7 +335,7 @@
 						<span class="whitespace-nowrap">
 							-
 							<a
-								class="text-accent underline-offset-2 transition-colors hover:underline"
+								class="text-accent underline decoration-accent/40 underline-offset-2 transition-colors hover:decoration-accent"
 								href={alternateMacAsset.browser_download_url}
 								aria-label={platform === 'macos-arm64'
 									? 'Download the x64 build for Intel Macs'
