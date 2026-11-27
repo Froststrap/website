@@ -240,7 +240,7 @@
 	<title>{title}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href="{SITE_URL}/" />
-
+	<meta	name="gridinsoft-key" content="htaq6esjrdr5kzpb5349hw935e2n3iymmb6hmgygn89fnov96wlkkwjcv5fan9re" />
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Froststrap" />
 	<meta property="og:title" content={title} />
